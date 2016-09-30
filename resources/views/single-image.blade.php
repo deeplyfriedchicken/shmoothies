@@ -13,7 +13,7 @@
                                         <div class="meta">
                                             <span><time datetime="{{ $blog[0]->date_posted }}">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $blog[0]->date_posted)->format('F j, Y') }}</time></span>
                                             <span>{{ $blog[0]->blog_views }} Views</span>
-                                            <span><a href="#">8 Shares</a></span>
+                                            <span><a href="#">{{ $blog[0]->blog_shares }} Shares</a></span>
                                         </div><!-- /meta -->
                                         <figure>
                                             <img src="{{ URL::asset('img/blog_covers/'.$blog[0]->media_url)  }}" alt="{{ $blog[0]->blog_title }}">
@@ -46,11 +46,11 @@
                                     </div><!-- /post-meta -->
                                     <div class="post-author">
                                         <figure class="avatar">
-                                            <img src="{{ $author[0]->image_url }}" alt="Maverick Author">
+                                            <img src="{{ URL::asset('img/profile_pictures/'.$author[0]->image_url) }}" alt="{{ $author[0]->first_name." ".$author[0]->last_name  }} | Shmoothies Author">
                                         </figure>
                                         <div class="author-details">
                                             <h2>{{ $author[0]->first_name }} {{ $author[0]->last_name }}</h2>
-                                            <p>This is a description of the author. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae accumsan nisl. Donec at laoreet sapien, eget facilisis velit.</p>
+                                            <p>{{ $author[0]->description }}</p>
                                             <ul class="social-icons small">
                                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -63,42 +63,23 @@
                                     <div class="related-posts">
                                         <h6>YOU MIGHT ALSO LIKE</h6>
                                         <div class="row">
+                                          @foreach($latest as $blog)
+                                            @if($loop->index == 2)
+                                              @break
+                                            @endif
                                             <article class="blog-post col-md-4">
                                                 <header>
                                                     <figure>
-                                                        <img src="img/blog/related-post-1.jpg" alt="Maverick Blog">
+                                                        <img src="{{ URL::asset('img/blog_covers/'.$blog->media_url) }}" alt="{{ $blog->blog_title }}">
                                                     </figure>
-                                                    <h3><a href="#">Denim 2015 Fall Exclusives</a></h3>
+                                                    <h3><a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}">{{ $blog->blog_title }}</a></h3>
                                                     <div class="meta">
-                                                        <span>Fashion</span>
-                                                        <span><time datetime="2015-09-03">July 03, 2015</time></span>
+                                                        <span>{{ $blog->blog_category }}</span>
+                                                        <span><time datetime="{{ $blog->date_posted }}">{{ $blog->date_posted->format('F j, Y') }}</time></span>
                                                     </div><!-- /meta -->
                                                 </header>
                                             </article>
-                                            <article class="blog-post col-md-4">
-                                                <header>
-                                                    <figure>
-                                                        <img src="img/blog/related-post-2.jpg" alt="Maverick Blog">
-                                                    </figure>
-                                                    <h3><a href="#">Great Outdoor Travel Tips For Beginners</a></h3>
-                                                    <div class="meta">
-                                                        <span>Travel</span>
-                                                        <span><time datetime="2015-09-03">July 03, 2015</time></span>
-                                                    </div><!-- /meta -->
-                                                </header>
-                                            </article>
-                                            <article class="blog-post col-md-4">
-                                                <header>
-                                                    <figure>
-                                                        <img src="img/blog/related-post-3.jpg" alt="Maverick Blog">
-                                                    </figure>
-                                                    <h3><a href="#">Pacific Goods New Arrivals</a></h3>
-                                                    <div class="meta">
-                                                        <span>Fashion</span>
-                                                        <span><time datetime="2015-09-03">July 03, 2015</time></span>
-                                                    </div><!-- /meta -->
-                                                </header>
-                                            </article>
+                                            @endforeach
                                         </div><!-- /row -->
                                     </div><!-- /related-posts -->
                                     <div class="post-comments">

@@ -12,8 +12,24 @@ use Auth;
 
 use App\Http\Requests;
 
+function cleanUrl($string) {
+  $string = strtolower($string);
+  //Make alphanumeric (removes all other characters)
+  $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+  //Clean up multiple dashes or whitespaces
+  $string = preg_replace("/[\s-]+/", " ", $string);
+  //Convert whitespaces and underscore to dash
+  $string = preg_replace("/[\s_]/", "-", $string);
+  return $string;
+}
+function runSync() {
+    chdir('/homepages/37/d587320544/htdocs/Shmoothies');
+    shell_exec('./sync.sh'); //moving things to public after image upload
+}
+
 class AdminController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -57,6 +73,7 @@ class AdminController extends Controller
         $path = public_path('img/profile_pictures/'.$id.".".$request->file('photo')->extension());
         $user->image_url = $id.".".$request->file('photo')->extension();
         $image->save($path);
+        runSync();
       }
       $user->save();
       $request->session()->flash('updated-user', 'User settings successfully updated.');
@@ -84,14 +101,7 @@ class AdminController extends Controller
     public function updateBlog(Request $request, $id) {
       $blog = Lookup::find($id);
       $blog->blog_title = $request['title'];
-      $string = strtolower($blog->blog_title);
-      //Make alphanumeric (removes all other characters)
-      $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
-      //Clean up multiple dashes or whitespaces
-      $string = preg_replace("/[\s-]+/", " ", $string);
-      //Convert whitespaces and underscore to dash
-      $string = preg_replace("/[\s_]/", "-", $string);
-      $blog->blog_url = $string;
+      $blog->blog_title = cleanUrl($blog->blog_title);
       $blog->blog_category = $request['category'];
       $blog->heading = $request['heading'];
       $blog->content = $request['content'];
@@ -101,6 +111,7 @@ class AdminController extends Controller
         $path = public_path('img/blog_covers/'.$id.".".$request->file('photo')->extension());
         $blog->media_url = $id.".".$request->file('photo')->extension();
         $image->save($path);
+        runSync();
       }
       $blog->date_posted = Carbon::now()->toDateString();
       Lookup::where('category', 'tag')->where('ref_id', $blog->id)->delete();
@@ -126,14 +137,7 @@ class AdminController extends Controller
         $blog->category = 'blog';
         $blog->blog_title = $request['title'];
         $blog->user_id = Auth::id();
-        $string = strtolower($blog->blog_title);
-        //Make alphanumeric (removes all other characters)
-        $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
-        //Clean up multiple dashes or whitespaces
-        $string = preg_replace("/[\s-]+/", " ", $string);
-        //Convert whitespaces and underscore to dash
-        $string = preg_replace("/[\s_]/", "-", $string);
-        $blog->blog_url = $string;
+        $blog->blog_title = cleanUrl($blog->blog_title);
         $blog->blog_category = $request['category'];
         $blog->heading = $request['heading'];
         $blog->content = $request['content'];
@@ -144,6 +148,7 @@ class AdminController extends Controller
           $path = public_path('img/blog_covers/'.$id.".".$request->file('photo')->extension());
           $blog->media_url = $id.".".$request->file('photo')->extension();
           $image->save($path);
+          runSync();
         }
         $blog->date_posted = Carbon::now()->toDateString();
         $blog->save();
