@@ -73,13 +73,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ Auth::user()->image_url }}" class="user-image" alt="User Image">
+              <img src="{{ URL::asset('img/profile_pictures/'.Auth::user()->image_url) }}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{ Auth::user()->image_url }}" class="img-circle" alt="User Image">
+                <img src="{{ URL::asset('img/profile_pictures/'.Auth::user()->image_url) }}" class="img-circle" alt="User Image">
 
                 <p>
                   {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} - Web Developer
@@ -89,7 +89,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Settings</a>
+                  <a href="/shm-admin/settings" class="btn btn-default btn-flat">Settings</a>
                 </div>
                 <div class="pull-right">
                   <form method="POST" action="/logout">{{ csrf_field() }}<button type="submit" class="btn btn-default btn-flat">Sign out</a></form>
@@ -108,7 +108,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ Auth::user()->image_url }}" class="img-circle" alt="User Image">
+          <img src="{{ URL::asset('img/profile_pictures/'.Auth::user()->image_url) }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
@@ -212,7 +212,7 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0.0
+      <b>Version</b> 1.0.2
     </div>
     <strong>Copyright &copy; 2016 <a href="https://ukiyodesigns.github.io">Ukiyo Designs</a>.</strong> All rights
     reserved.

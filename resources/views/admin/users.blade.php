@@ -24,11 +24,11 @@
                 <tr>
                   <td>{{ $user->id }}</td>
                   <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                  <td>{{ $user->date_posted }}</td>
+                  <td>{{ $user->created_at->format('F j, Y') }}</td>
                   <td><span class="label label-warning">Pending</span></td>
                   <td>{{ $user->description }}</td>
                   <td>
-                    <form method="POST" action="approve/{{ $user->id }}">
+                    <form method="POST" action="users/approve/{{ $user->id }}">
                       {{ csrf_field() }}
                       <input name="_method" type="hidden" value="PATCH">
                       <input class="btn btn-success" type="submit" value="Approve">

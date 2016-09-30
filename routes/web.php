@@ -15,12 +15,19 @@ Route::get('/', ['uses' => 'HomeController@index']);
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'shm-admin'], function () {
   Route::get('/', ['uses' => 'AdminController@index']);
+  Route::get('settings', function() {
+    return view('admin/settings');
+  });
+  Route::post('settings', ['uses' => 'AdminController@updateSettings']);
+
   Route::get('blog', ['uses' => 'AdminController@newPost']);
   Route::post('blog', ['uses' => 'AdminController@storePost']);
   Route::get('blog/edit', ['uses' => 'AdminController@showBlogs']);
   Route::get('blog/edit/{id}', ['uses' => 'AdminController@editBlog']);
   Route::post('blog/edit/{id}', ['uses' => 'AdminController@updateBlog']);
+
   Route::get('users', ['uses' => 'AdminController@showUsers']);
+
   Route::patch('users/approve/{id}', ['as' => 'user.verify', 'uses' => 'AdminController@approveUser']);
 });
 

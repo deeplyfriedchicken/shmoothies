@@ -32,7 +32,7 @@
                             </div><!-- /slider -->
                         </div><!-- /col-md-8 -->
                         <div class="col-md-4">
-                            @foreach($latest as $blog)
+                            @foreach($popular as $blog)
                               @if($loop->last)
                                 @break
                               @endif

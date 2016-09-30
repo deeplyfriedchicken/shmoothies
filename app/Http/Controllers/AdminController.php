@@ -39,6 +39,29 @@ class AdminController extends Controller
       }
       return view('admin/wait');
     }
+    public function updateSettings(Request $request) {
+      $user = User::where('id', Auth::user()->id)->first();
+      $user->first_name = $request['first_name'];
+      $user->last_name = $request['last_name'];
+      $user->email = $request['email'];
+      $user->instagram = $request['instagram'];
+      $user->facebook = $request['facebook'];
+      $user->linkedin = $request['linkedin'];
+      $user->snapchat = $request['snapchat'];
+      $user->pinterest = $request['pinterest'];
+      $user->tumblr = $request['tumblr'];
+      $user->description = $request['description'];
+      if ($request->file('photo') != null) {
+        $image = Image::make($request->file('photo'))->resize(400, 400);
+        $id = uniqid();
+        $path = public_path('img/profile_pictures/'.$id.".".$request->file('photo')->extension());
+        $user->imagme_url = $id.".".$request->file('photo')->extension();
+        $image->save($path);
+      }
+      $user->save();
+      $request->session()->flash('updated-user', 'User settings successfully updated.');
+      return redirect('shm-admin/settings');
+    }
     public function approveUser($id) {
       if(Auth::user()->isVerified == 1 && Auth::user()->isRoot == 1) {
         $user = User::findOrFail($id);
@@ -87,7 +110,6 @@ class AdminController extends Controller
           $tag->category = 'tag';
           $tag->tag = $tags;
           $tag->save();
-        }
       }
       $blog->save();
       $blog = Lookup::where('category', 'blog')->where('id', $blog->id)->get();
