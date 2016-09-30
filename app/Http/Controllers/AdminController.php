@@ -55,7 +55,7 @@ class AdminController extends Controller
         $image = Image::make($request->file('photo'))->resize(400, 400);
         $id = uniqid();
         $path = public_path('img/profile_pictures/'.$id.".".$request->file('photo')->extension());
-        $user->imagme_url = $id.".".$request->file('photo')->extension();
+        $user->image_url = $id.".".$request->file('photo')->extension();
         $image->save($path);
       }
       $user->save();
