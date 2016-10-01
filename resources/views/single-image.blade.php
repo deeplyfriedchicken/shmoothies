@@ -23,7 +23,7 @@
                                         {!! $blog[0]->content !!}
                                     </div><!-- /post-content -->
                                     <div class="post-share clearfix">
-                                        <p class="counter"><span>8</span>Shares</p>
+                                        <p class="counter"><span>{{ $blog[0]->blog_shares }}</span>Shares</p>
                                         <ul class="social-icons style2">
                                             <li><a href="#"><i class="fa fa-facebook"></i>Like</a></li>
                                             <li><a href="#"><i class="fa fa-twitter"></i>Tweet</a></li>

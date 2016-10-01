@@ -101,7 +101,7 @@ class AdminController extends Controller
     public function updateBlog(Request $request, $id) {
       $blog = Lookup::find($id);
       $blog->blog_title = $request['title'];
-      $blog->blog_title = cleanUrl($blog->blog_title);
+      $blog->blog_url = cleanUrl($blog->blog_title);
       $blog->blog_category = $request['category'];
       $blog->heading = $request['heading'];
       $blog->content = $request['content'];
@@ -137,11 +137,12 @@ class AdminController extends Controller
         $blog->category = 'blog';
         $blog->blog_title = $request['title'];
         $blog->user_id = Auth::id();
-        $blog->blog_title = cleanUrl($blog->blog_title);
+        $blog->blog_url = cleanUrl($blog->blog_title);
         $blog->blog_category = $request['category'];
         $blog->heading = $request['heading'];
         $blog->content = $request['content'];
         $blog->blog_views = 0;
+        $blog->blog_shares = 0;
         if ($request->file('photo') != null) {
           $image = Image::make($request->file('photo'))->resize(900, 600);
           $id = uniqid();

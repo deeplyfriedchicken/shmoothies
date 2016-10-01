@@ -4308,3 +4308,25 @@ figure.avatar img {
 article.blog-post header figure {
   margin-bottom: 2em;
 }
+div.post-contentul {
+   list-style-type: disc;
+   list-style-position: inside;
+}
+div.post-contentol {
+   list-style-type: decimal;
+   list-style-position: inside;
+}
+div.post-content ul ul, div.post-content ol ul {
+   list-style-type: circle;
+   list-style-position: inside;
+   margin-left: 15px;
+}
+div.post-content ol ol, div.post-content ul ol {
+   list-style-type: lower-latin;
+   list-style-position: inside;
+   margin-left: 15px;
+}
+div.post-content p img {
+  display: block;
+  margin: 0 auto;
+}

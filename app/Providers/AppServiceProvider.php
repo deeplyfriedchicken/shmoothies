@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
       View::share('category', $category);
       $tags = Lookup::where('category', 'tag')->select('tag')->groupBy('tag')->get();
       View::share('tags', $tags);
-      $latest = Lookup::where('category', 'blog')->orderBy('date_posted', 'asc')->take(3)->get();
+      $latest = Lookup::where('category', 'blog')->orderBy('date_posted', 'desc')->take(3)->get();
       View::share('latest', $latest);
     }
 

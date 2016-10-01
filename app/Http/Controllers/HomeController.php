@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $blogs = DB::table('lookup')->orderBy('date_posted', 'asc')->where('category', 'blog')->get();
+        $blogs = DB::table('lookup')->where('category', 'blog')->orderBy('date_posted', 'desc')->get();
         $popular = Lookup::where('category', 'blog')->orderBy('blog_views', 'desc')->get();
         return view('index', ['blogs' => $blogs, 'popular' => $popular]);
     }
