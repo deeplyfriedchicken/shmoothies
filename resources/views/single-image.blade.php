@@ -1,5 +1,14 @@
 @extends('master')
 @section('title', 'Shmoothies | '.$blog[0]->blog_title)
+@section('meta')
+  <meta property="og:image" content="{{ URL::asset('img/blog_covers/'.$blog[0]->media_url) }}" />
+
+  <meta property="og:description" content="{{ $blog[0]->heading }}" />
+
+  <meta property="og:url" content="{{ URL::asset("/section/".$blog[0]->blog_category."/".$blog[0]->blog_url) }}" />
+
+  <meta property="og:title" content="shmoothies.com - {{ $blog[0]->blog_title }}" />
+@endsection
 @section('single', 'single')
 @section('main')
             <section class="contents-container">

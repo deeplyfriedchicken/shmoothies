@@ -1,5 +1,27 @@
 @extends('master')
-@section('title', 'Shmooties - The College Food Blog')
+@section('title', 'Shmoothies - The College Food Blog')
+@section('meta')
+  <meta property="og:image" content="{{ URL::asset('img/logo/shmoothies-logo3.png') }}" />
+
+  <meta property="og:description" content="Just your average college kids struggling and eating their way through college." />
+
+  <meta property="og:url" content="http://shmoothies.com" />
+
+  <meta property="og:title" content="shmoothies.com - The Claremont Colleges Food Blog" />
+@endsection
+@section('styles')
+  <style>
+    a img.fade {
+       opacity: 1;
+       transition: opacity .25s ease-in-out;
+       -moz-transition: opacity .25s ease-in-out;
+       -webkit-transition: opacity .25s ease-in-out;
+     }
+    a img.fade:hover {
+      opacity: 0.5;
+    }
+  </style>
+@endsection
 @section('main')
             <section class="contents-container">
                 <div class="container">
@@ -13,7 +35,7 @@
                                 <article class="blog-post">
                                     <header>
                                         <figure>
-                                            <img src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}">
+                                            <a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}"><img class="fade" src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}"></a>
                                         </figure>
                                         <ul class="categories">
                                             <li><a href="/section/{{ $blog->blog_category }}">{{ $blog->blog_category }}</a></li>
@@ -24,7 +46,7 @@
                                         <div class="meta">
                                             <span><time datetime="{{ $blog->date_posted }}">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $blog->date_posted)->format('F j, Y') }}</time></span>
                                             <span>{{ $blog->blog_views }} Views</span>
-                                            <span><a href="#">8 Comments</a></span>
+                                            <span><a href="#">{{ $blog->blog_shares }} Shares</a></span>
                                         </div><!-- /meta -->
                                     </footer>
                                 </article>
@@ -39,7 +61,7 @@
                             <article class="blog-post featured-post">
                                 <header>
                                     <figure>
-                                        <img src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}">
+                                        <a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}"><img class="fade" src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}"></a>
                                     </figure>
                                     <h3><a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}">{{ $blog->blog_title }}</a></h3>
                                 </header>
@@ -57,7 +79,7 @@
                                       <article class="blog-post col-md-6 col-sm-6">
                                           <header>
                                               <figure>
-                                                  <img src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}">
+                                                  <a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}"><img class="fade" src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}"></a>
                                               </figure>
                                               <ul class="categories">
                                                   <li><a href="/section/{{ $blog->blog_category }}">{{ $blog->blog_category }}</a></li>
@@ -66,7 +88,7 @@
                                               <div class="meta">
                                                   <span><time datetime="{{ $blog->date_posted }}">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $blog->date_posted)->format('F j, Y') }}</time></span>
                                                   <span>{{ $blog->blog_views }} Views</span>
-                                                  <span><a href="#">8 Shares</a></span>
+                                                  <span><a href="#">{{ $blog->blog_shares }} Shares</a></span>
                                               </div><!-- /meta -->
                                           </header>
                                           <div class="post-content">
@@ -82,7 +104,7 @@
                                       <article class="blog-post col-md-6 col-sm-6">
                                           <header>
                                               <figure>
-                                                  <img src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}">
+                                                  <a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}"><img class="fade" src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}"></a>
                                               </figure>
                                               <ul class="categories">
                                                   <li><a href="/section/{{ $blog->blog_category }}">{{ ucwords($blog->blog_category) }}</a></li>
@@ -91,7 +113,7 @@
                                               <div class="meta">
                                                   <span><time datetime="{{ $blog->date_posted }}">{{ $blog->date_posted->format('F j, Y') }}</time></span>
                                                   <span>{{ $blog->blog_views }} Views</span>
-                                                  <span><a href="#">8 Shares</a></span>
+                                                  <span><a href="#">{{ $blog->blog_shares }} Shares</a></span>
                                               </div><!-- /meta -->
                                           </header>
                                           <div class="post-content">

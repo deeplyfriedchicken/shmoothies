@@ -6,6 +6,7 @@
         <title>@yield('title')</title>
         <meta name="description" content="Shmoothies - The College Blog">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        @yield('meta')
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel='shortcut icon' href="{{ URL::asset('favicon.png') }}">
 
@@ -31,6 +32,7 @@
         <!-- /JS -->
         <script src="{{ URL::asset('js/vendor/modernizr.min.js') }}"></script>
     </head>
+    @yield('styles')
     <body class="@yield('single') sticky-nav-on">
       <!--[if lt IE 8]>
           <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -41,7 +43,7 @@
                   <div class="col-md-12">
                       <div class="logo-container">
                           <a href="#">
-                              <img src="{{ URL::asset('img/logo/shmoothies-logo3.png') }}" alt="Maverick Logo">
+                              <img src="{{ URL::asset('img/logo/shmoothies-logo3.png') }}" alt="Shmoothies.com Logo">
                           </a>
                       </div><!-- /logo-container -->
                   </div><!-- /col-md-12 -->
@@ -64,7 +66,7 @@
       <aside id="sideheader">
           <header>
               <div class="logo-container">
-                  <a href="#"><img src="{{ URL::asset('img/logo/shmoothies-logo-default.png') }}" alt="Maverick"></a>
+                  <a href="#"><img src="{{ URL::asset('img/logo/shmoothies-logo-default.png') }}" alt="Shmoothies.com"></a>
               </div><!-- /logo-container -->
               <a href="#" class="sideheader-close-btn">
                   <span></span>
@@ -107,7 +109,7 @@
           </div>
           {{-- <div class="widget widget_customAd">
               <a href="#">
-                  <img src="{{ URL::asset('img/misc/sideheaderAd.jpg') }}" alt="Maverick">
+                  <img src="{{ URL::asset('img/misc/sideheaderAd.jpg') }}" alt="Shmoothies.com">
               </a>
           </div> --}}
           <p class="copyright">Copyright © 2016 Shmoothies.</p>
@@ -160,7 +162,7 @@
                               </a>
                               <div class="logo-wrapper">
                                   <a href="#" class="logo">
-                                      <img src="{{ URL::asset('img/logo/shmoothies-logo-default.png') }}" alt="Maverick Logo">
+                                      <img src="{{ URL::asset('img/logo/shmoothies-logo-default.png') }}" alt="Shmoothies.com Logo">
                                   </a>
                               </div><!-- /logo-wrapper -->
                               <div class="search-container">
@@ -233,7 +235,7 @@
                       @foreach($latest as $blog)
                         <li>
                            <div class="featured-image">
-                                <img src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}" alt="">
+                                <a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}"><img class="fade" src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}" alt=""><a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}">
                             </div>
                             <div class="post-content">
                                 <p class="post-title"><a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}">@if(strlen($blog->blog_title) > 50){{ substr($blog->blog_title, 0, 50) }}...@else{{ $blog->blog_title }}@endif</a></p>
@@ -263,7 +265,7 @@
               <div class="widget widget_text">
                   <h5>Hey!</h5>
                   <div class="textwidget">
-                      <p>Just your average college kids struggling and baking their way through college.</p>
+                      <p>Just your average college kids struggling and eating their way through college.</p>
                   </div>
               </div><!-- /widget -->
             </div><!-- /sidebar -->
@@ -279,7 +281,7 @@
                           <h5>About Us</h5>
                           <div class="textwidget">
                               <img src="{{ URL::asset('img/logo/shmoothies-light.png') }}" alt="Shmoothies">
-                              <p>Just your average college kids struggling and baking their way through college.</p>
+                              <p>Just your average college kids struggling and eating their way through college.</p>
                               <form  class="subscribe-form" action="php/subscribe.php">
                                   <input type="email" class="subscribe-email" name="subscribe-email" placeholder="Sign Up For Our Newsletter">
                                   <input type="submit" value="&#xf101;">
@@ -295,7 +297,7 @@
                               @foreach($latest as $blog)
                               <li>
                                  <div class="featured-image">
-                                      <img src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}">
+                                      <a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}"><img class="fade" src="{{ URL::asset('img/blog_covers/'.$blog->media_url)  }}"></a>
                                   </div>
                                   <div class="post-content">
                                       <p class="post-title"><a href="/section/{{ $blog->blog_category }}/{{ $blog->blog_url }}">@if(strlen($blog->blog_title) > 50){{ substr($blog->blog_title, 0, 50) }}...@else{{ $blog->blog_title }}@endif</a></p>
